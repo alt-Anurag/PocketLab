@@ -24,7 +24,7 @@ India's electronics manufacturing base is also expanding quickly — the country
 
 Pocket Lab isn't a smaller version of an existing DSO — it rethinks where the cost in a DSO actually comes from, and removes it:
 
-1. **The smartphone *is* the display and processing unit.** The single biggest cost and bulk driver in any DSO is the dedicated screen + onboard processing to render waveforms. Pocket Lab eliminates that entirely by offloading it to a device every student already owns — their Android phone — via the open-source [Scoppy](https://github.com/Ho-Ro/Scoppy) app. This alone is what makes the ~5–10x cost reduction possible, not just cheaper components.
+1. **The smartphone *is* the display and processing unit.** The single biggest cost and bulk driver in any DSO is the dedicated screen + onboard processing to render waveforms. Pocket Lab eliminates that entirely by offloading it to a device every student already owns — their Android phone — via the open-source [Scoppy](https://github.com/fhdm-dev/scoppy) app. This alone is what makes the ~5–10x cost reduction possible, not just cheaper components.
 2. **One microcontroller consolidation for the function generator.** Rather than needing separate analog circuits for each waveform shape (see [Previous Attempts](#previous-attempts--what-we-tried-before-this) below), a single ESP32 generates all four standard waveforms — sine, square, triangular, and sawtooth — in software. Fewer components, more precision, easier to tune.
 3. **Credit-card form factor.** By moving both the display and most of the analog circuitry out of the physical unit, what's left fits in a footprint the size of a credit card — genuinely pocketable, not just "compact" by DSO standards.
 4. **Real cost math, not a marketing number.** At ~₹1,500 in electronics (and an estimated ~₹3,000 landed cost including chassis, holder, buck converter, and battery), Pocket Lab lands at roughly **1/13th to 1/6th** the cost of comparable low-end DSOs on the market — see the comparison below.
@@ -39,7 +39,7 @@ Pocket Lab isn't a smaller version of an existing DSO — it rethinks where the 
 | FNIRSI DSO-TC3 | 500 kHz | 10 MS/s, 10-bit | 4,500–5,500 | 103×79×31 mm | None |
 | **Pocket Lab** | *(RP2040/Scoppy-limited — see Scoppy specs)* | *(RP2040/Scoppy-limited)* | **~1,500 (electronics) / ~3,000 (all-in)** | **Credit-card sized** | Via phone (Scoppy app) |
 
-> Pocket Lab's frequency range and sampling precision are governed by the RP2040 + Scoppy firmware combination — if you need exact figures for your build, refer to [Scoppy's own specifications](https://github.com/Ho-Ro/Scoppy).
+> Pocket Lab's frequency range and sampling precision are governed by the RP2040 + Scoppy firmware combination — if you need exact figures for your build, refer to [Scoppy's own specifications](https://github.com/fhdm-dev/scoppy).
 
 ---
 
@@ -64,7 +64,7 @@ Pocket Lab is built around two microcontrollers, each handling one half of the s
   Generates sine, square, triangular, and sawtooth waveforms. This replaced our earlier discrete-component approach (NE555 timer for sawtooth, Arduino PWM + RC filtering for sine, and an LM358P op-amp integrator for triangular waves) — consolidating all waveform generation into a single microcontroller for better precision and flexibility.
 
 - **Oscilloscope — Raspberry Pi Pico (RP2040):**
-  Runs the [Scoppy](https://github.com/Ho-Ro/Scoppy) firmware, sampling the circuit under test and streaming the data to the companion Android app, which renders it as a live oscilloscope trace — no dedicated display hardware required.
+  Runs the [Scoppy](https://github.com/fhdm-dev/scoppy) firmware, sampling the circuit under test and streaming the data to the companion Android app, which renders it as a live oscilloscope trace — no dedicated display hardware required.
 
 - **Test circuits explored during development** included a voltage divider, PN junction diode characteristic curves, and op-amp circuits — used to validate the DSO's measurement accuracy.
 
@@ -120,9 +120,9 @@ pocket-lab/
 Refer to the schematic in [`hardware/schematic`](./hardware/schematic) to wire up the ESP32 and RP2040 alongside the signal-conditioning circuitry. Reference photos of the assembled prototype are available in [`hardware/images`](./hardware/images).
 
 ### 2. Flash the RP2040 (Oscilloscope side)
-1. Install the [Scoppy](https://github.com/Ho-Ro/Scoppy) firmware on your Raspberry Pi Pico — follow the setup instructions in the Scoppy repository.
+1. Install the [Scoppy](https://github.com/fhdm-dev/scoppy) firmware on your Raspberry Pi Pico — follow the [Installation and Getting Started guide](https://oscilloscope.fhdm.xyz/wiki/Installation-&-Getting-Started) from the Scoppy project.
 2. Flash the code from [`firmware/rp2040`](./firmware/rp2040) in this repo (our configuration/tuning on top of Scoppy).
-3. Install the **Scoppy** app on your Android phone from the [Play Store](https://play.google.com/store/apps/details?id=de.crycode.scoppy) (or sideload per the Scoppy repo instructions).
+3. Install the **Scoppy** app on your Android phone from the [Play Store](https://play.google.com/store/apps/details?id=xyz.fhdm.scoppy) (or sideload per the Scoppy repo instructions).
 
 ### 3. Flash the ESP32 (Function Generator side)
 1. Open [`firmware/esp32`](./firmware/esp32) in the Arduino IDE or PlatformIO.
@@ -143,7 +143,7 @@ Refer to the schematic in [`hardware/schematic`](./hardware/schematic) to wire u
 |---|---|
 | Function Generation | ESP32 (WROOM-32 DevKit V1) |
 | Signal Acquisition / DSO | Raspberry Pi Pico (RP2040) |
-| DSO Display & UI | [Scoppy](https://github.com/Ho-Ro/Scoppy) (open-source, Android) |
+| DSO Display & UI | [Scoppy](https://github.com/fhdm-dev/scoppy) (open-source, Android) |
 | Firmware Languages | C / C++ (Arduino framework / Pico SDK) |
 | Hardware | Custom PCB / breadboard prototype |
 
@@ -173,14 +173,14 @@ Built by **Team IICH 2025** at Delhi Technological University:
 
 ## Acknowledgements
 
-- [Scoppy](https://github.com/Ho-Ro/Scoppy) — the open-source Android-oscilloscope project that made the display/UI side of this project possible. Full credit to its original developers; this project builds configuration and hardware integration around it, not a reimplementation of it.
+- [Scoppy](https://github.com/fhdm-dev/scoppy) — the open-source Android-oscilloscope project that made the display/UI side of this project possible. Full credit to its original developers; this project builds configuration and hardware integration around it, not a reimplementation of it.
 - Delhi Technological University (DTU) and the IICH Hackathon 2025 for the platform to build this.
 
 ---
 
 ## License
 
-> Add your chosen license here (e.g. MIT, GPL-3.0). If you're using Scoppy's firmware/code directly, make sure your license is compatible with Scoppy's own license — check the [Scoppy repository](https://github.com/Ho-Ro/Scoppy) for its terms.
+> Add your chosen license here (e.g. MIT, GPL-3.0). If you're using Scoppy's firmware/code directly, make sure your license is compatible with Scoppy's own license — check the [Scoppy repository](https://github.com/fhdm-dev/scoppy) for its terms.
 
 ---
 
