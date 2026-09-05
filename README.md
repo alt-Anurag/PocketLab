@@ -4,7 +4,7 @@
 
 Pocket Lab is a compact, low-power signal generation and measurement device that turns your Android smartphone into the display and processing unit for a digital storage oscilloscope (DSO) and function generator — combined into a single credit-card-sized board. It was built to bring lab-bench equipment within reach of students, cutting the cost of comparable devices by roughly **5–10x**.
 
-> Built at **IICH Hackathon, Delhi Technological University (DTU), 2025.**
+> Built at **IICH Hackathon, Delhi Technological University (DTU), 2026.**
 
 ---
 
