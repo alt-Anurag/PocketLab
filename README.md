@@ -97,8 +97,6 @@ pocket-lab/
 ├── hardware/
 │   ├── schematic/      # Circuit schematics
 │   └── images/         # Photos of the assembled circuit/PCB
-├── docs/
-│   └── presentations/  # Hackathon slide decks (IICH 2025, etc.)
 └── README.md
 ```
 
