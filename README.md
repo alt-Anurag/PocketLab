@@ -165,7 +165,7 @@ Built by **Team IICH 2025** at Delhi Technological University:
 
 - **Anurag Kumar Jha** — Team Lead
 - **Mohammed Adeeb Khan**
-- **Abhishek**
+- **Abhishek Shivhare**
 
 ---
 
